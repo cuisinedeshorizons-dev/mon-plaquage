@@ -1,0 +1,10 @@
+MON PLAQUAGE - VERSION MISE A JOUR
+
+1. Ouvrir index.html dans un navigateur pour tester.
+2. Pour publier : déposer le contenu de ce dossier à la racine du dépôt GitHub mon-plaquage puis importer le dépôt dans Vercel.
+3. Les quantités sont sauvegardées localement sur chaque appareil. Pas de synchronisation téléphone/ordinateur pour le moment.
+
+Règles intégrées :
+- Saveur : croissants x2/x4, pains au chocolat x2/x4, mix 2+2. Plaques de 30 pour les deux.
+- Sélection : croissants et pains au chocolat x2/x5/x8, mix 4+4. Plaques croissants 30, pains au chocolat 36.
+- Bureau : +8 pains au chocolat Sélection du lundi au samedi, pas le dimanche.

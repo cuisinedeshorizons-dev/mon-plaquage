@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#25352d">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Mon Plaquage</title>
+<style>
+:root{--bg:#f4f1e9;--card:#fffdf8;--ink:#25352d;--muted:#6c756e;--accent:#bd6747;--line:#e5dfd2;--soft:#edf0e9}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:var(--ink);color:white;padding:22px 18px 25px}header .wrap,main{max-width:1050px;margin:auto}
+h1{margin:0;font-size:clamp(25px,5vw,36px)}header p{margin:5px 0 0;color:#d9e0d9}
+main{padding:18px 14px 40px}.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
+select,button,input{font:inherit}select,.dayselect{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:white;color:var(--ink)}
+button{border:0;border-radius:10px;padding:10px 14px;background:var(--ink);color:white;font-weight:650;cursor:pointer}
+button.secondary{background:#e8e4d9;color:var(--ink)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 2px 8px #26352d0a}
+h2{font-size:19px;margin:0 0 12px}h3{font-size:15px;margin:15px 0 8px;color:var(--muted)}
+.field{display:grid;grid-template-columns:1fr 78px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid #eee9df}
+.field:last-child{border-bottom:0}.field label{font-size:14px}.field input{width:78px;text-align:center;border:1px solid var(--line);border-radius:9px;padding:8px;background:white}
+.results{margin-top:14px}.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.result{background:var(--soft);border-radius:12px;padding:12px}.result strong{display:block;font-size:15px}.big{font-size:24px;font-weight:800;margin-top:3px}
+.small{font-size:12px;color:var(--muted)}.total{font-weight:750;margin-top:8px}
+.notice{margin-top:12px;padding:12px;border-radius:12px;background:#fff2e9;border:1px solid #f0d7c7}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.settings{margin-top:14px}
+.settings summary{cursor:pointer;font-weight:700}.capacity{display:grid;grid-template-columns:1fr 85px;gap:8px;align-items:center;margin-top:8px}
+.capacity input{width:85px;padding:7px;border:1px solid var(--line);border-radius:8px}
+footer{max-width:1050px;margin:0 auto;padding:0 14px 25px;color:var(--muted);font-size:12px}
+@media(max-width:680px){.grid,.result-grid{grid-template-columns:1fr}.top{align-items:stretch}.top select{width:100%}.top button{flex:1}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><h1>Mon Plaquage</h1><p>Calcul des viennoiseries et des plaques à préparer</p></div></header>
+<main>
+  <div class="top">
+    <label><strong>Jour à préparer&nbsp; </strong><select id="day" class="dayselect"></select></label>
+    <div class="actions" style="margin:0"><button class="secondary" id="reset">Remettre ce jour à zéro</button></div>
+  </div>
+  <div class="grid">
+    <section class="card">
+      <h2>Saveur</h2>
+      <h3>Croissants Saveur</h3>
+      <div class="field"><label for="sv-c2">Boîtes de 2 croissants</label><input id="sv-c2" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="sv-c4">Boîtes de 4 croissants</label><input id="sv-c4" type="number" min="0" step="1" value="0"></div>
+      <h3>Pains au chocolat Saveur</h3>
+      <div class="field"><label for="sv-p2">Boîtes de 2 pains au chocolat</label><input id="sv-p2" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="sv-p4">Boîtes de 4 pains au chocolat</label><input id="sv-p4" type="number" min="0" step="1" value="0"></div>
+      <h3>Boîtes mixtes Saveur</h3>
+      <div class="field"><label for="sv-mix">2 croissants + 2 pains au chocolat</label><input id="sv-mix" type="number" min="0" step="1" value="0"></div>
+    </section>
+    <section class="card">
+      <h2>Sélection</h2>
+      <h3>Croissants Sélection</h3>
+      <div class="field"><label for="sel-c2">Boîtes de 2 croissants</label><input id="sel-c2" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="sel-c5">Boîtes de 5 croissants</label><input id="sel-c5" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="sel-c8">Boîtes de 8 croissants</label><input id="sel-c8" type="number" min="0" step="1" value="0"></div>
+      <h3>Pains au chocolat Sélection</h3>
+      <div class="field"><label for="sel-p2">Boîtes de 2 pains au chocolat</label><input id="sel-p2" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="sel-p5">Boîtes de 5 pains au chocolat</label><input id="sel-p5" type="number" min="0" step="1" value="0"></div>
+      <div class="field"><label for="sel-p8">Boîtes de 8 pains au chocolat</label><input id="sel-p8" type="number" min="0" step="1" value="0"></div>
+      <h3>Boîtes mixtes Sélection</h3>
+      <div class="field"><label for="sel-mix">4 croissants + 4 pains au chocolat</label><input id="sel-mix" type="number" min="0" step="1" value="0"></div>
+    </section>
+  </div>
+  <section class="card results">
+    <h2>À sortir et à plaquer</h2>
+    <div class="result-grid" id="results"></div>
+    <div class="notice" id="office"></div>
+    <div class="total" id="grand"></div>
+  </section>
+  <details class="card settings">
+    <summary>Réglages des capacités des plaques</summary>
+    <div class="capacity"><label for="cap-svc">Plaque croissants Saveur</label><input id="cap-svc" type="number" min="1" value="30"></div>
+    <div class="capacity"><label for="cap-svp">Plaque pains au chocolat Saveur</label><input id="cap-svp" type="number" min="1" value="30"></div>
+    <div class="capacity"><label for="cap-selc">Plaque croissants Sélection</label><input id="cap-selc" type="number" min="1" value="30"></div>
+    <div class="capacity"><label for="cap-selp">Plaque pains au chocolat Sélection</label><input id="cap-selp" type="number" min="1" value="36"></div>
+  </details>
+  <div class="actions">
+    <button class="secondary" id="export">Exporter la sauvegarde</button>
+    <button class="secondary" id="import">Importer une sauvegarde</button>
+    <input id="file" type="file" accept="application/json" hidden>
+  </div>
+</main>
+<footer>Les quantités saisies sont enregistrées sur cet appareil et dans ce navigateur. Elles ne sont pas synchronisées automatiquement entre le téléphone et l'ordinateur.</footer>
+<script>
+const days=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+const ids=['sv-c2','sv-c4','sv-p2','sv-p4','sv-mix','sel-c2','sel-c5','sel-c8','sel-p2','sel-p5','sel-p8','sel-mix'];
+const capIds=['cap-svc','cap-svp','cap-selc','cap-selp'];
+const defaults={};
+let store=JSON.parse(localStorage.getItem('monPlaquageV2')||'null')||{days:{},caps:{'cap-svc':30,'cap-svp':30,'cap-selc':30,'cap-selp':36}};
+days.forEach(d=>{if(!store.days[d])store.days[d]={};ids.forEach(id=>{if(store.days[d][id]==null)store.days[d][id]=0})});
+capIds.forEach(id=>{if(!store.caps[id])store.caps[id]=id==='cap-selp'?36:30});
+const daySel=document.getElementById('day');
+days.forEach((d,i)=>{const o=document.createElement('option');o.value=d;o.textContent=d;daySel.append(o)});
+function save(){localStorage.setItem('monPlaquageV2',JSON.stringify(store))}
+function val(id){return Math.max(0,Math.floor(Number(document.getElementById(id).value)||0))}
+function current(){return store.days[daySel.value]}
+function loadDay(){ids.forEach(id=>document.getElementById(id).value=current()[id]||0);capIds.forEach(id=>document.getElementById(id).value=store.caps[id]);calc()}
+function plate(total,capacity){return `${Math.floor(total/capacity)} plaque(s) pleine(s) + ${total%capacity} pièce(s) à part`}
+function card(name,total,cap){return `<div class="result"><strong>${name}</strong><div class="big">${total} pièce(s)</div><div class="small">${plate(total,cap)} · capacité ${cap}</div></div>`}
+function calc(){
+ const v=Object.fromEntries(ids.map(id=>[id,val(id)]));
+ const svc=v['sv-c2']*2+v['sv-c4']*4+v['sv-mix']*2;
+ const svp=v['sv-p2']*2+v['sv-p4']*4+v['sv-mix']*2;
+ const selc=v['sel-c2']*2+v['sel-c5']*5+v['sel-c8']*8+v['sel-mix']*4;
+ const office=daySel.value==='Dimanche'?0:8;
+ const selp=v['sel-p2']*2+v['sel-p5']*5+v['sel-p8']*8+v['sel-mix']*4+office;
+ const c=Object.fromEntries(capIds.map(id=>[id,Math.max(1,val(id))]));
+ document.getElementById('results').innerHTML=
+ card('Croissants Saveur',svc,c['cap-svc'])+
+ card('Pains au chocolat Saveur',svp,c['cap-svp'])+
+ card('Croissants Sélection',selc,c['cap-selc'])+
+ card('Pains au chocolat Sélection',selp,c['cap-selp']);
+ document.getElementById('office').innerHTML=office?`<strong>Sortie bureau :</strong> 8 pains au chocolat Sélection ajoutés automatiquement pour ${daySel.value}.`:'<strong>Sortie bureau :</strong> aucun supplément le dimanche.';
+ document.getElementById('grand').textContent=`Total général : ${svc+svp+selc+selp} viennoiseries`;
+ ids.forEach(id=>current()[id]=v[id]);capIds.forEach(id=>store.caps[id]=c[id]);save();
+}
+ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));
+capIds.forEach(id=>document.getElementById(id).addEventListener('input',calc));
+daySel.addEventListener('change',loadDay);
+document.getElementById('reset').onclick=()=>{ids.forEach(id=>current()[id]=0);save();loadDay()};
+document.getElementById('export').onclick=()=>{const blob=new Blob([JSON.stringify(store,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sauvegarde-mon-plaquage.json';a.click();URL.revokeObjectURL(a.href)};
+document.getElementById('import').onclick=()=>document.getElementById('file').click();
+document.getElementById('file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const x=JSON.parse(await f.text());if(!x.days||!x.caps)throw Error();store=x;days.forEach(d=>{if(!store.days[d])store.days[d]={};ids.forEach(id=>{if(store.days[d][id]==null)store.days[d][id]=0})});capIds.forEach(id=>{if(!store.caps[id])store.caps[id]=id==='cap-selp'?36:30});save();loadDay();alert('Sauvegarde importée.')}catch{alert('Fichier de sauvegarde invalide.')}e.target.value=''};
+loadDay();
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>
